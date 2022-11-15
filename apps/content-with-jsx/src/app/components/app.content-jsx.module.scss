@@ -1,0 +1,10 @@
+.base-border{
+    border: 1px solid black;
+}
+
+.attr{
+    @extend .base-border;
+}
+.content{
+    @extend .base-border;
+}
