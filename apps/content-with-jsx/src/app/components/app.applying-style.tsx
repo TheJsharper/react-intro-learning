@@ -1,11 +1,13 @@
+import './app.content-jsx.module.scss';
+
 const ApplyingStyle = ()=>{
     const ankerstyle = {textDecoration: 'none', padding: '5px'};
     const browsers = ["firebox", "Chrome", "Internet Explorer", "Microsoft Edge", "Opera", "Opera Mobile"];
     
     return (
-        <div>
+        <div className='style-apply'>
 
-            <h1>Hellow World</h1>
+            <h2>Style application on elements</h2>
             <a href="http://google.com" style={ankerstyle} target="blank"> Google</a>
             
             <ul>
