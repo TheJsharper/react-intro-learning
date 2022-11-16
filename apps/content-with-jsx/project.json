@@ -20,7 +20,7 @@
           "apps/content-with-jsx/src/favicon.ico",
           "apps/content-with-jsx/src/assets"
         ],
-        "styles": ["apps/content-with-jsx/src/styles.scss"],
+        "styles": ["apps/content-with-jsx/src/styles.scss", "node_modules/semantic-ui-css/semantic.min.css"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },

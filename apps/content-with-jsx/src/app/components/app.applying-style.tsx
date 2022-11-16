@@ -12,7 +12,7 @@ const ApplyingStyle = ()=>{
             
             <ul>
 
-           {browsers.map((browser)=> (<li style={{listStyle:'none'}}>{browser}</li>))}
+           {browsers.map((browser:string, index:number)=> (<li key={index} style={{listStyle:'none'}}>{browser}</li>))}
             </ul>
                 
             
