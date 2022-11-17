@@ -1,24 +1,21 @@
-import { faker } from '@faker-js/faker';
-const Comment = () => {
+import { CommentModel } from './models/app.comment.model';
+const Comment = (comment: CommentModel ) => {
+    console.log(comment);
   return (
-    <div className="ui container comments">
-      <div className="comment">
-        <a href="/" className="avatar">
-          <img src={faker.image.avatar()} alt="avatar" />
+    <div className="comment">
+      <a href="/" className="avatar">
+        <img src={comment.author} alt="avatar" />
+      </a>
+      <div className="content">
+        <a href="/" className="author">
+          {comment.firstName}
         </a>
-        <div className="content">
-          <a href="/" className="author">
-            {faker.name.firstName('female')}
-          </a>
-          <div className="metadata">
-            <span className="date">
-                {faker.date.recent().toLocaleDateString()}
-            </span>
-          </div>
-          <div className="text">
-            {faker.lorem.words()}
-          </div>
+        <div className="metadata">
+          <span className="date">
+            {comment.createDate}
+          </span>
         </div>
+        <div className="text">{comment.text}</div>
       </div>
     </div>
   );
