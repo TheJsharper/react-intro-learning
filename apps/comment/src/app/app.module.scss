@@ -1,1 +1,9 @@
-/* Your styles goes here. */
+.comment-container{
+    display: flex !important;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.ui.card:first-child{
+    margin-top: 1rem !important;
+
+}
