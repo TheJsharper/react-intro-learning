@@ -1,1 +1,21 @@
-/* Your styles goes here. */
+.centered-text{
+    display: grid;
+    /* justify-content: center; */
+    /* align-items: center; */
+     height: 100vh;
+   /* grid-template-columns: 30% 1fr 36%;*/
+   grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    "icon . ."
+    ". text ."
+    ". . icon";
+}
+i.icon, i.icons {
+    font-size: 30em !important;
+}
+.season-icon{
+    grid-area: icon;
+}
+.season-text{
+    grid-area: text;
+}
