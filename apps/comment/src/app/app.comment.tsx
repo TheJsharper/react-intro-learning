@@ -8,15 +8,15 @@ const Comment = () => {
         </a>
         <div className="content">
           <a href="/" className="author">
-            Sam
+            {faker.name.firstName('female')}
           </a>
           <div className="metadata">
             <span className="date">
-                Today at 6:00PM
+                {faker.date.recent().toLocaleDateString()}
             </span>
           </div>
           <div className="text">
-            Nice blog post!
+            {faker.lorem.words()}
           </div>
         </div>
       </div>
