@@ -1,16 +1,24 @@
-import Comment from './app.comment';
+import ApprovalCard from './components/app.approval';
+import Comment from './components/app.comment';
 import { CommentModel } from './models/app.comment.model';
-import CommpentService from './services/app.comment.service';
+import CommpenService from './services/app.comment.service';
 export function App() {
-  const comments:Array<CommentModel> = CommpentService();
- 
+  const comments: Array<CommentModel> = CommpenService();
   const first = comments[0];
   const sec = comments[1];
-  
+  const thrid = comments[2];
+
   return (
     <div className="ui container comments">
-      <Comment {...first} />
-      <Comment {...sec} />
+      <ApprovalCard>
+        <Comment {...first} />
+      </ApprovalCard>
+      <ApprovalCard>
+        <Comment {...sec} />
+      </ApprovalCard>
+      <ApprovalCard>
+        <Comment {...thrid} />
+      </ApprovalCard>
     </div>
   );
 }

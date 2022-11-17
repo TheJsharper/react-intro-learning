@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { CommentModel } from '../models/app.comment.model';
 
-const CommpentService: () => Array<CommentModel> = () => {
+const CommpenService: () => Array<CommentModel> = () => {
   const comments: Array<CommentModel> = Array.from(
     { length: 10 },
     (_, i) => i + 1
@@ -16,4 +16,4 @@ const CommpentService: () => Array<CommentModel> = () => {
   return comments;
 };
 
-export default CommpentService;
+export default CommpenService;

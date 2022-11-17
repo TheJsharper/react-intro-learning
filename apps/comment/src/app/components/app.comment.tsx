@@ -1,4 +1,4 @@
-import { CommentModel } from './models/app.comment.model';
+import { CommentModel } from '../models/app.comment.model';
 const Comment = (comment: CommentModel ) => {
     console.log(comment);
   return (
