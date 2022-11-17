@@ -1,6 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
-import styles from './app.module.scss';
 
 interface Props {
   products: string[];
@@ -13,7 +12,7 @@ interface State {
 }
 
 class App extends React.Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.state = { lat: 0, long: 0, error: '' };
   }
