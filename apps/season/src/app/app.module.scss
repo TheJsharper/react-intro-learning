@@ -1,20 +1,19 @@
 .centered-text{
     display: grid;
-    /* justify-content: center; */
-    /* align-items: center; */
-     height: 100vh;
-   /* grid-template-columns: 30% 1fr 36%;*/
-   grid-template-columns: repeat(3, 1fr);
-    grid-template-areas: 
-    "icon . ."
-    ". text ."
-    ". . icon";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+        "icon . ."
+        ". text ."
+        ". . icon-bottom";
+    height: 100vh;
 }
 i.icon, i.icons {
-    font-size: 30em !important;
+    font-size: 10em !important;
 }
-.season-icon{
-    grid-area: icon;
+.season-view{
+    justify-self: center;
+    align-self: center;
 }
 .season-text{
     grid-area: text;
