@@ -1,7 +1,7 @@
 import React from 'react';
 import SeasonDisplay from './app.season-display';
 import Spinner from './app.spinner';
-
+import Error from './app.error';
 interface Props {
   products: string[];
 }
@@ -38,11 +38,7 @@ class App extends React.Component<Props, State> {
 
   override render(): React.ReactNode {
     if (this.state.error.length > 0 && !this.state.lat && !this.state.long) {
-      return (
-        <div style={{ background: 'red', color: 'white' }}>
-          Error: {this.state.error}
-        </div>
-      );
+      return <Error {...{ message: this.state.error }} />;
     }
     if (this.state.error.length === 0 && this.state.lat && this.state.long) {
       return (
@@ -51,7 +47,7 @@ class App extends React.Component<Props, State> {
         </div>
       );
     }
-    return <Spinner {...{ message: '....waiting for user\'s respond' }} />;
+    return <Spinner {...{ message: "....waiting for user's respond" }} />;
   }
 }
 export default App;
@@ -62,5 +58,9 @@ export interface GeoLocationModel {
 }
 
 export interface SpinnerModel {
+  message?: string;
+}
+
+export interface ErrorModel {
   message?: string;
 }

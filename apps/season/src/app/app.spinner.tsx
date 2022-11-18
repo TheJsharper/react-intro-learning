@@ -4,8 +4,8 @@ import React from 'react';
 const defaultSpinnerProps = {
     message: "Loading",
 };
-type Propss = SpinnerModel & typeof defaultSpinnerProps;
-const Spinner=({message}:Propss)=>{
+type SpinnerPropsWithDefaultValue = SpinnerModel & typeof defaultSpinnerProps;
+const Spinner=({message}:SpinnerPropsWithDefaultValue)=>{
     return (
         <div className="ui active dimmer">
             <div className="ui big text loader">{message}</div>
