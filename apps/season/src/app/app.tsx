@@ -1,6 +1,5 @@
-import SeasonDisplay  from './app.season-display';
 import React from 'react';
-import { LabelDetail } from 'semantic-ui-react';
+import SeasonDisplay from './app.season-display';
 
 interface Props {
   products: string[];
