@@ -44,7 +44,7 @@ class App extends React.Component<Props, State> {
         </div>
       );
     }
-    if (this.state.error.length == 0 && this.state.lat && this.state.long) {
+    if (this.state.error.length === 0 && this.state.lat && this.state.long) {
       return (
         <div>
           <SeasonDisplay {...{ lat: this.state.lat, long: this.state.long }} />
