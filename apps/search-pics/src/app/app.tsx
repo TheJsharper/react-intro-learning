@@ -3,17 +3,20 @@
 import React from 'react';
 import SearchBar from './components/app.search-bar';
 
+export default class App extends React.Component<unknown, { term: string }> {
+  override state: { term: string } = { term: '' };
 
-
-export default class App extends React.Component {
-  handleSubmitSearch(event: React.SyntheticEvent):void{
-    event.preventDefault();
-    console.log("====>x", event);
+  handleSubmitSearch(payload:string): void {
+    //event.preventDefault();
+    console.log('====>x', payload);
+    this.setState({ term: 'next value' });
   }
   override render(): React.ReactNode {
     return (
       <div className="ui container search-container">
-        <SearchBar {...{handleSubmitSearch:this.handleSubmitSearch}} />
+        <SearchBar
+          {...{ handleSubmitSearch: this.handleSubmitSearch.bind(this) }}
+        />
       </div>
     );
   }
