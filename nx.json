@@ -8,7 +8,9 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"], "runtimeCacheInputs":[
+          "echo $NX_ACCESS_KEY"
+        ]
       }
     }
   },
