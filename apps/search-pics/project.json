@@ -20,7 +20,7 @@
           "apps/search-pics/src/favicon.ico",
           "apps/search-pics/src/assets"
         ],
-        "styles": ["apps/search-pics/src/styles.scss"],
+        "styles": ["apps/search-pics/src/styles.scss","node_modules/semantic-ui-css/semantic.min.css"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },

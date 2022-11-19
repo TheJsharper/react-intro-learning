@@ -1,8 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
+import SearchBar from './components/app.search-bar';
+
 export function App() {
   return (
-   <h1>Hello World</h1>
+    <div className="ui container">
+      <SearchBar />
+    </div>
   );
 }
 
