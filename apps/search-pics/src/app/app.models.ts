@@ -19,7 +19,6 @@ export interface Result {
     links:                    ResultLinks;
     likes:                    number;
     liked_by_user:            boolean;
-    current_user_collections: any[];
     sponsorship:              null;
     topic_submissions:        ResultTopicSubmissions;
     user:                     User;
@@ -75,7 +74,6 @@ export interface CoverPhoto {
     links:                    ResultLinks;
     likes:                    number;
     liked_by_user:            boolean;
-    current_user_collections: any[];
     sponsorship:              null;
     topic_submissions:        CoverPhotoTopicSubmissions;
     premium:                  boolean;
