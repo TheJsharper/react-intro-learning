@@ -12,9 +12,15 @@ const unsplashApi: () => AxiosInstance = () => {
   });
 };
 
+const isAccountAndEnvUnsplashCreated:()=> boolean = ()=>{
+  const isDefined  = process.env['NX_UNSPLASH_API_BASE_URL'] !== undefined &&  process.env['NX_UNSPLASH_ACCESS_KEY'] !== undefined;
+  return   isDefined ;
+}
+
 const unsplashApiGet: (term: string) => Promise<AxiosResponse<UnsplashResponse>> = async (term: string) => {
   const data: Promise<AxiosResponse<UnsplashResponse>> = unsplashApi().get('/search/photos', {params: { query: term }, }  );
   return await data;
 };
 
+export {isAccountAndEnvUnsplashCreated};
 export default unsplashApiGet;

@@ -13,8 +13,6 @@ export default class ImageCard extends React.Component<Result, { spans: number }
         this.imgRef.current?.addEventListener("load", (_: Event) => this.setSpans());
     }
     setSpans(): void {
-
-        console.log("ref", this.imgRef.current?.clientHeight);
         const height = this.imgRef.current?.clientHeight;
         const spans = Math.ceil(height! /250);
         this.setState({ spans });
