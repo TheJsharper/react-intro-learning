@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default class SearchBar extends React.Component<unknown, {term:string}>{
+export default class SearchBar extends React.Component<{onFormSubmit: (term:string)=>void}, {term:string}>{
     
     override state: Readonly<{ term: string; }> = {term:''};
 
@@ -9,8 +9,9 @@ export default class SearchBar extends React.Component<unknown, {term:string}>{
         console.log("=>", event.target.value);
         this.setState({term:event.target.value})
     }
-
+    
     private onSearchSubmit(event: React.SyntheticEvent):void{
+        this.props.onFormSubmit(this.state.term);
         event.preventDefault();
         console.log(event);
     }
