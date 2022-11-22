@@ -1,0 +1,84 @@
+{
+  "name": "you-tube-fake",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/you-tube-fake/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/you-tube-fake",
+        "index": "apps/you-tube-fake/src/index.html",
+        "baseHref": "/",
+        "main": "apps/you-tube-fake/src/main.tsx",
+        "polyfills": "apps/you-tube-fake/src/polyfills.ts",
+        "tsConfig": "apps/you-tube-fake/tsconfig.app.json",
+        "assets": [
+          "apps/you-tube-fake/src/favicon.ico",
+          "apps/you-tube-fake/src/assets"
+        ],
+        "styles": ["apps/you-tube-fake/src/styles.scss","node_modules/semantic-ui-css/semantic.min.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/you-tube-fake/src/environments/environment.ts",
+              "with": "apps/you-tube-fake/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "you-tube-fake:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "you-tube-fake:build:development"
+        },
+        "production": {
+          "buildTarget": "you-tube-fake:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/you-tube-fake/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/you-tube-fake/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
