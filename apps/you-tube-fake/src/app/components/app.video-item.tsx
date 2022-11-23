@@ -3,10 +3,11 @@ import { Item } from "../models/app.youtube-api";
 
 export interface VideoItemProps {
     video: Item;
+    onVideoSelect: (selectedVideo:Item)=>void
 }
-const VideoItem = (props: VideoItemProps) => {
+const VideoItem: (props: VideoItemProps) => JSX.Element = (props: VideoItemProps) => {
     return (
-        <div className="video-item-container item ">
+        <div onClick={()=> props.onVideoSelect(props.video)} className="video-item-container item ">
             <img className="ui image" src={props.video.snippet.thumbnails.medium.url} alt="thund" />
             <div className="content">
                 <div className="header">
