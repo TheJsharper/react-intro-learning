@@ -8,7 +8,7 @@ export interface VideoListProps {
 }
 const VideoList = (props: VideoListProps) => {
 
-    const values: JSX.Element[] | undefined = props.videos?.map((video: Item) => (<VideoItem key={video.id.videoId}  {...{ video, onVideoSelect:props.onVideoSelect }} />));
+    const values: JSX.Element[] | undefined = props.videos?.map((video: Item, index:number) => (<VideoItem key={`${video.id.videoId}${index}`}  {...{ video, onVideoSelect:props.onVideoSelect }} />));
 
     return (<div className="ui relaxed divided list">
         {values}

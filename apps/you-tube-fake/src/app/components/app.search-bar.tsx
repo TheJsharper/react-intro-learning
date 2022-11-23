@@ -6,14 +6,12 @@ export default class SearchBar extends React.Component<{onFormSubmit: (term:stri
     override state: Readonly<{ term: string; }> = {term:''};
 
     private onSearchChange (event:React.ChangeEvent<HTMLInputElement>):void{
-        console.log("=>", event.target.value);
         this.setState({term:event.target.value})
     }
     
     private onSearchSubmit(event: React.SyntheticEvent):void{
         this.props.onFormSubmit(this.state.term);
         event.preventDefault();
-        console.log(event);
     }
 
     override render(): React.ReactNode {
