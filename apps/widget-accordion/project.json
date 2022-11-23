@@ -1,0 +1,84 @@
+{
+  "name": "widget-accordion",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/widget-accordion/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/widget-accordion",
+        "index": "apps/widget-accordion/src/index.html",
+        "baseHref": "/",
+        "main": "apps/widget-accordion/src/main.tsx",
+        "polyfills": "apps/widget-accordion/src/polyfills.ts",
+        "tsConfig": "apps/widget-accordion/tsconfig.app.json",
+        "assets": [
+          "apps/widget-accordion/src/favicon.ico",
+          "apps/widget-accordion/src/assets"
+        ],
+        "styles": ["apps/widget-accordion/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/widget-accordion/src/environments/environment.ts",
+              "with": "apps/widget-accordion/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "widget-accordion:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "widget-accordion:build:development"
+        },
+        "production": {
+          "buildTarget": "widget-accordion:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/widget-accordion/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/widget-accordion/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
