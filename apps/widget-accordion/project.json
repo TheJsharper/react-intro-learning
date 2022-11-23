@@ -20,7 +20,7 @@
           "apps/widget-accordion/src/favicon.ico",
           "apps/widget-accordion/src/assets"
         ],
-        "styles": ["apps/widget-accordion/src/styles.scss"],
+        "styles": ["apps/widget-accordion/src/styles.scss","node_modules/semantic-ui-css/semantic.min.css"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
