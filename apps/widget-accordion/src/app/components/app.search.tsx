@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useEffect, useState } from "react";
 import { Result } from "../models/app.wikipedia-response";
 import wikipediaApiGet from "../services/app.wiki.service";
@@ -6,21 +6,27 @@ import wikipediaApiGet from "../services/app.wiki.service";
 const Search = () => {
 
     const [term, setTerm] = useState<string>('');
+
     const [results, setResults] = useState<Result[]>([]);
 
     useEffect(() => {
-        
-        if (term)
-            (async () => {
-                const { data } = await wikipediaApiGet(term);
-                setResults(data.query.search);
-            })();
+
+        const timeoutId = setTimeout(() => {
+
+            if (term)
+                (async () => {
+                    const { data } = await wikipediaApiGet(term);
+                    setResults(data.query.search);
+                })();
+
+        }, 1000);
+        return () => clearTimeout(timeoutId);
     }, [term]);
 
     const renderedItems: Array<JSX.Element> = results.map((value: Result) => {
         return (
             <div key={value.pageid} className="item">
-                <div className="right floated content"><a href={`https://en.wikipedia.org?curid=${value.pageid}`} className="ui button"  target="blank" >Go</a></div>
+                <div className="right floated content"><a href={`https://en.wikipedia.org?curid=${value.pageid}`} className="ui button" target="blank" >Go</a></div>
                 <div className="content">
                     <div className="header">
                         {value.title}

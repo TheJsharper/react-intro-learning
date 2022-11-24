@@ -1,7 +1,4 @@
 import  Search  from "./components/app.search";
-
-
-
 export function App() {
   return (
     <div className="ui container">
