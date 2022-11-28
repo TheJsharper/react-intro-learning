@@ -19,7 +19,8 @@ const options: Array<Options> = [
 ]
 
 export interface Options {
-    label: string; value: string;
+    label: string; 
+    value: string;
 
 }
 
@@ -48,3 +49,5 @@ const Translate = () => {
 
 
 export default Translate;
+
+export {options};
