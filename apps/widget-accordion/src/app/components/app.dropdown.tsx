@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { Options } from "../app";
 
 export interface DropdownProps {
@@ -15,6 +15,24 @@ const Dropdown = (props: DropdownProps) => {
 
     const [open, setOpen] = useState<boolean>(false);
 
+    useEffect(() => {
+
+        const onBodyClick = (event: MouseEvent) => {
+
+            if (event.target instanceof HTMLDivElement && ref.current?.contains(event.target)) {
+
+                return;
+            }
+            setOpen(false);
+        };
+        document.body.addEventListener('click', onBodyClick, { capture: true })
+        return () => {
+            document.body.removeEventListener('click', onBodyClick);
+        }
+    }, []);
+
+    const ref: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+
 
 
     const renderedOptions: Array<JSX.Element | null> = options.map((option: Options, index: number) => {
@@ -25,7 +43,7 @@ const Dropdown = (props: DropdownProps) => {
                 <div
                     key={`${option.value}-${index}`}
                     className="item"
-                    onClick={() => setSelected(option)}
+                    onClick={() => { setSelected(option); }}
                 >
                     {option.label}
                 </div>
@@ -33,15 +51,14 @@ const Dropdown = (props: DropdownProps) => {
     });
 
 
-
     return (
-        <div className="ui form">
+        <div ref={ref} className="ui form" >
             <div className="field">
                 <label htmlFor="" className="label">Select a Color</label>
-                <div  onClick={()=> setOpen(!open)} className={`ui selection dropdown ${open? 'visible active':''}`}>
+                <div onClick={() => { setOpen(!open); }} className={`ui selection dropdown ${open ? 'visible active' : ''}`}>
                     <i className="dropdown icon"></i>
                     <div className="text">{selected.label}</div>
-                    <div className={`menu ui ${open?'visible transition' :''}`}>
+                    <div className={`menu ui ${open ? 'visible transition' : ''}`}>
                         {renderedOptions}
                     </div>
                 </div>
