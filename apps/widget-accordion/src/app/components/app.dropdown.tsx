@@ -1,17 +1,19 @@
 import { RefObject, useEffect, useRef, useState } from "react";
-import { Options } from "../app";
+import { Options } from "./app.translate";
+
 
 export interface DropdownProps {
     options: Array<Options>;
     selected: Options;
     setSelected: (option: Options) => void;
+    label:string;
 }
 
 
 
 const Dropdown = (props: DropdownProps) => {
 
-    const { options, selected, setSelected } = props;
+    const { options, selected, setSelected, label } = props;
 
     const [open, setOpen] = useState<boolean>(false);
 
@@ -54,7 +56,7 @@ const Dropdown = (props: DropdownProps) => {
     return (
         <div ref={ref} className="ui form" >
             <div className="field">
-                <label htmlFor="" className="label">Select a Color</label>
+                <label htmlFor="" className="label">{label}</label>
                 <div onClick={() => { setOpen(!open); }} className={`ui selection dropdown ${open ? 'visible active' : ''}`}>
                     <i className="dropdown icon"></i>
                     <div className="text">{selected.label}</div>
