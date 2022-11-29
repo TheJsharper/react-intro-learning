@@ -24,7 +24,6 @@ class SongList extends React.Component<SongListProps> {
     }
 
     override render(): React.ReactNode {
-        console.log("render", this.props);
         return (
             <div className="ui divided list">
                 <h1>My Songs</h1>
@@ -37,7 +36,6 @@ class SongList extends React.Component<SongListProps> {
 
 
 const mapStateToProps: (State: AppState) => SongListProps = (state: AppState) => {
-    console.log("MAP", state);
     return { songs: state.songs, selectSong, selectedSong:null  };
 }
 

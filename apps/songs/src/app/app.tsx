@@ -12,7 +12,7 @@ export function App() {
           <SongList />
         </div>
         <div className="column eight wide">
-        <AppSongDetail />
+          <AppSongDetail />
         </div>
       </div>
     </div>

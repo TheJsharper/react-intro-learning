@@ -1,4 +1,4 @@
- import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import { Song } from '../models/app.models';
 
 
@@ -20,14 +20,14 @@ export const songsReducer = () => {
     ]
 }
 
-export const selectedSongReducer = (selectedSong: Song | null = null, action:{type:string, payload:Song})=>{
-    if(action.type === 'SONG_SELECTED'){
-       return action.payload;
+export const selectedSongReducer = (selectedSong: Song | null = null, action: { type: string, payload: Song }) => {
+    if (action.type === 'SONG_SELECTED') {
+        return action.payload;
     }
     return selectedSong;
 };
 
 export default combineReducers({
-    songs:songsReducer,
-    selectedSong:selectedSongReducer
+    songs: songsReducer,
+    selectedSong: selectedSongReducer
 })
