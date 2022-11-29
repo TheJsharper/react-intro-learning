@@ -1,29 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+interface SearchBarProps {
+    onFormSubmit: (term: string) => void;
+}
+const SearchBar = (props: SearchBarProps) => {
+
+    const [term, setTerm] = useState('');
 
 
-export default class SearchBar extends React.Component<{onFormSubmit: (term:string)=>void}, {term:string}>{
-    
-    override state: Readonly<{ term: string; }> = {term:''};
-
-    private onSearchChange (event:React.ChangeEvent<HTMLInputElement>):void{
-        this.setState({term:event.target.value})
-    }
-    
-    private onSearchSubmit(event: React.SyntheticEvent):void{
-        this.props.onFormSubmit(this.state.term);
+    const onSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
+        props.onFormSubmit(term);
     }
 
-    override render(): React.ReactNode {
-        return (
-            <div className=' search-bar ui segment'>
-               <form onSubmit={(e:React.SyntheticEvent)=> this.onSearchSubmit(e)}  className="ui form">
-                    <div className="field">
-                        <label htmlFor="video"> Video Search </label>
-                        <input name="video" type="text" value={this.state.term} onChange={(e:React.ChangeEvent<HTMLInputElement>)=> this.onSearchChange(e)} />
-                    </div>
-               </form>
-            </div>
-        )
-    }
-};
+    return (
+        <div className=' search-bar ui segment'>
+            <form onSubmit={(e: React.SyntheticEvent) => onSubmit(e)} className="ui form">
+                <div className="field">
+                    <label htmlFor="video"> Video Search </label>
+                    <input name="video" type="text" value={term} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTerm(e.target.value)} />
+                </div>
+            </form>
+        </div>
+    )
+}
+
+export default SearchBar;
