@@ -1,8 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import PostList from "./components/app.post-list";
+
 
 export function App() {
   return (
-    <div>Blog</div>
+    <div className="ui container">
+      <PostList />
+    </div>
   );
 }
 
