@@ -1,34 +1,27 @@
-import { AxiosResponse } from 'axios';
 import { useEffect, useState } from "react";
 import { ReactComponent as Logo } from '../assets/images/yt-logo.svg';
 import SearchBar from "./components/app.search-bar";
 import VideoDetail from "./components/app.video-details";
 import VideoList from "./components/app.video-list";
-import { Item, YoutubeResponseData } from "./models/app.youtube-api";
-import youtubeApiGet from "./services/apis/app.service.api";
+import UseVideo from './hooks/app.use-video';
+import { Item } from "./models/app.youtube-api";
 
 
 const App = () => {
-  const [youtubeResponseData, setYoutubeResponseData] = useState<YoutubeResponseData | null>(null);
 
-  const [selectedVideo, setSelectedVideo] = useState<Item | null>(null);
 
-  useEffect(() =>{ (async ()=>await onTermSubmit('ReactJs'))()}, []);
+  const [selectedVideo, setSelectedVideo] = useState<Item | undefined>(undefined);
 
-  const onTermSubmit: (term: string) => Promise<void> = async (term: string) => {
+  const { youtubeResponseData, search } = UseVideo('ReactJS');
 
-    const youtubeApiResponse: AxiosResponse<YoutubeResponseData> = await youtubeApiGet(term);
+  useEffect(() => setSelectedVideo(youtubeResponseData?.items[0]), [youtubeResponseData]);
 
-    setYoutubeResponseData(youtubeApiResponse.data);
-    
-    setSelectedVideo(youtubeApiResponse.data.items[0]);
-  }
 
-  
-   return (
+
+  return (
     <div className=" ui container">
-      <Logo  style={{width:'10%', height:'10%'}}/>
-      <SearchBar onFormSubmit={onTermSubmit} />
+      <Logo style={{ width: '10%', height: '10%' }} />
+      <SearchBar onFormSubmit={search} />
       <div className="ui grid">
         <div className="ui row">
           <div className="eleven wide column">

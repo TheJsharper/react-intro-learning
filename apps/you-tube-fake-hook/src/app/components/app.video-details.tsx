@@ -1,6 +1,6 @@
 import { Item } from "../models/app.youtube-api";
 
-const VideoDetail = (props: { selectedVideo: Item | null }) => {
+const VideoDetail = (props: { selectedVideo: Item | undefined }) => {
 
     const videoSrc= `https://youtube.com/embed/${props.selectedVideo?.id.videoId}`; 
     return (<div>
