@@ -4,8 +4,6 @@ import { PostAction } from "../models/app.state";
 
 export const postsReducer = (state: Post[] = [], action: PostAction) => {
 
-
-
     switch (action.type) {
 
         case 'FETCH_POSTS':

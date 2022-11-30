@@ -13,12 +13,12 @@ interface UserHeaderProps {
 class UserHeader extends React.Component<UserHeaderProps>{
 
 
-  
+
     override render(): React.ReactNode {
 
         return (
 
-            <div className="header">UserHeader{this.props.user?.name}</div>
+            <div className="header">{this.props.user?.name}</div>
         )
     }
 
