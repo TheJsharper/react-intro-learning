@@ -20,7 +20,7 @@
           "apps/stream-client/src/favicon.ico",
           "apps/stream-client/src/assets"
         ],
-        "styles": ["apps/stream-client/src/styles.scss"],
+        "styles": ["apps/stream-client/src/styles.scss","node_modules/semantic-ui-css/semantic.min.css"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
