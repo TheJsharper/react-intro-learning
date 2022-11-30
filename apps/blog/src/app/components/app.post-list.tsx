@@ -1,14 +1,14 @@
 import React from "react";
-import {connect} from 'react-redux';
-import { fetchPosts } from "../actions";
+import { connect } from 'react-redux';
+import { fetchPostsAndUsers } from "../actions";
 import { Post } from "../models/app.json-placeholder.models";
 import { AppState } from "../models/app.state";
-import  UserHeader  from "./app.user-header";
+import UserHeader from "./app.user-header";
 
-class PostList extends React.Component<{fetchPosts: ()=>Promise<void>, posts:Post[]}>{
+class PostList extends React.Component<{fetchPostsAndUsers: ()=>Promise<void>, posts:Post[]}>{
 
     override componentDidMount(): void {
-        this.props.fetchPosts();
+        this.props.fetchPostsAndUsers();
         
     }
 
@@ -35,4 +35,4 @@ class PostList extends React.Component<{fetchPosts: ()=>Promise<void>, posts:Pos
     }
 }
 const mapStateToProps = (state:AppState)=> ({posts:state.posts});
-export default connect(mapStateToProps, {fetchPosts})( PostList);
+export default connect(mapStateToProps, {fetchPostsAndUsers})( PostList);
