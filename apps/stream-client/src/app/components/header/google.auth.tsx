@@ -5,6 +5,8 @@ import { LoadGapi } from "../services/app.google-auth";
 export interface GoogleAuthState {
     isLoggedIn: boolean;
     user?: User | null;
+    signIn?: ()=> void;
+    signOut?: ()=> void ;
 }
 
 export interface User {
@@ -20,14 +22,14 @@ export interface User {
 
 export class GoogleAuth extends React.Component<unknown, GoogleAuthState>{
 
-    override state: Readonly<GoogleAuthState> = { isLoggedIn: false, user: null };
+    override state: Readonly<GoogleAuthState> = { isLoggedIn: false, user: null, signIn:undefined, signOut: undefined };
 
 
     override componentDidMount(): void {
         (async () => {
 
             const auth = await LoadGapi();
-
+            this.setState( {signIn: auth.auth2Instance.signIn, signOut:auth.auth2Instance.signOut });
             auth.auth2Instance.isSignedIn.listen(() => this.IsLoggeInUser(auth));
 
 
@@ -59,15 +61,19 @@ export class GoogleAuth extends React.Component<unknown, GoogleAuthState>{
 
         console.log("====>", this.state);
 
+        if(this.state.isLoggedIn){
+            return (
+                    <button onClick={this.state.signOut} className="ui red google button">
+                        <i className="google icon" />
+                        Sign out
+                    </button>
+                );
+        }
         return (
-            <div>
-                Status
-                {this.state.isLoggedIn ? 'ja' : 'nein'}
-
-                <div>
-
-                </div>
-            </div>
+               <button onClick={this.state.signIn} className="ui red google button">
+                <i className="google icon" />
+                Sign in with google-account
+               </button> 
         )
     }
 }
