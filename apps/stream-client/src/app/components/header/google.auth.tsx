@@ -25,41 +25,35 @@ export class GoogleAuth extends React.Component<unknown, GoogleAuthState>{
 
     override componentDidMount(): void {
         (async () => {
+
             const auth = await LoadGapi();
-            this.setState({ isLoggedIn: auth.auth2Instance.isSignedIn.get() });
 
-            auth.auth2Instance.isSignedIn.listen(() => this.IsLoggeInUser(auth.auth2Instance.isSignedIn.get()));
-
-            auth.auth2Instance.isSignedIn.listen(() => this.setCurrentUser(auth.auth2Instance.currentUser?.get()))
-            console.log("Component====>", auth.auth2Instance.isSignedIn.get());
+            auth.auth2Instance.isSignedIn.listen(() => this.IsLoggeInUser(auth));
 
 
         })();
     }
-    private IsLoggeInUser(isLoggedIn: boolean) {
+    private IsLoggeInUser( auth: any) {
 
-
-        this.setState({ isLoggedIn })
-        
-
-    }
-    private setCurrentUser(user: any) {
-
-        if (user) {
-            const userRaw: User = {
-                email: user.getEmail(),
-                familyName: user.getFamilyName(),
-                givenName: user.getGivenName(),
-                id: user.getId(),
-                imageUrl: user.getImageUrl(),
-                name: user.getName()
+        if (auth.auth2Instance.isSignedIn.get()) {
+            const user: User = {
+                email: auth.auth2Instance.currentUser?.get().getBasicProfile().getEmail(),
+                familyName: auth.auth2Instance.currentUser?.get().getBasicProfile().getFamilyName(),
+                givenName: auth.auth2Instance.currentUser?.get().getBasicProfile().getGivenName(),
+                id: auth.auth2Instance.currentUser?.get().getBasicProfile().getId(),
+                imageUrl: auth.auth2Instance.currentUser?.get().getBasicProfile().getImageUrl(),
+                name: auth.auth2Instance.currentUser?.get().getBasicProfile().getName()
 
 
             }
-            this.setState({ user:userRaw })
-        }
+            this.setState({ user, isLoggedIn: auth.auth2Instance.isSignedIn.get() });
+        } else   this.setState({ user: null, isLoggedIn:auth.auth2Instance.isSignedIn.get() });
+
+        
+
 
     }
+
 
     override render(): React.ReactNode {
 
