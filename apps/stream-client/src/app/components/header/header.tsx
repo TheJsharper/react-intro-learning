@@ -3,13 +3,7 @@ import { GoogleAuth } from './google.auth';
 
 
 const Header = () => {
-    /*useEffect(() => {
-        (async () => {
-            const auth = await LoadGapi();
-            console.log("Component====>", auth);
-
-        })();
-    }, []);*/
+   
     return (
         <div className="ui secondary pointing menu">
             <Link to="/" className="item">Streamer</Link>

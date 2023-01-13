@@ -5,8 +5,9 @@ import { LoadGapi } from "../services/app.google-auth";
 export interface GoogleAuthState {
     isLoggedIn: boolean;
     user?: User | null;
-    signIn?: ()=> void;
-    signOut?: ()=> void ;
+    signIn?: () => void;
+    signOut?: () => void;
+    auth2: any;
 }
 
 export interface User {
@@ -22,58 +23,66 @@ export interface User {
 
 export class GoogleAuth extends React.Component<unknown, GoogleAuthState>{
 
-    override state: Readonly<GoogleAuthState> = { isLoggedIn: false, user: null, signIn:undefined, signOut: undefined };
+    override state: Readonly<GoogleAuthState> = { isLoggedIn: false, user: null, signIn: undefined, signOut: undefined, auth2: undefined };
 
 
     override componentDidMount(): void {
         (async () => {
 
             const auth = await LoadGapi();
-            this.setState( {signIn: auth.auth2Instance.signIn, signOut:auth.auth2Instance.signOut });
-            auth.auth2Instance.isSignedIn.listen(() => this.IsLoggeInUser(auth));
+            this.setState({ signIn: auth.auth2Instance.signIn, signOut: auth.auth2Instance.signOut, auth2: auth.auth2Instance });
 
 
         })();
+        console.log("===> DIDMONUT----");
     }
-    private IsLoggeInUser( auth: any) {
-
-        if (auth.auth2Instance.isSignedIn.get()) {
-            const user: User = {
-                email: auth.auth2Instance.currentUser?.get().getBasicProfile().getEmail(),
-                familyName: auth.auth2Instance.currentUser?.get().getBasicProfile().getFamilyName(),
-                givenName: auth.auth2Instance.currentUser?.get().getBasicProfile().getGivenName(),
-                id: auth.auth2Instance.currentUser?.get().getBasicProfile().getId(),
-                imageUrl: auth.auth2Instance.currentUser?.get().getBasicProfile().getImageUrl(),
-                name: auth.auth2Instance.currentUser?.get().getBasicProfile().getName()
+    private IsLoggeInUser() {
+        const user: User = {
+            email: this.state.auth2.currentUser?.get().getBasicProfile().getEmail(),
+            familyName: this.state.auth2.currentUser?.get().getBasicProfile().getFamilyName(),
+            givenName: this.state.auth2.currentUser?.get().getBasicProfile().getGivenName(),
+            id: this.state.auth2.currentUser?.get().getBasicProfile().getId(),
+            imageUrl: this.state.auth2.currentUser?.get().getBasicProfile().getImageUrl(),
+            name: this.state.auth2.currentUser?.get().getBasicProfile().getName()
 
 
-            }
-            this.setState({ user, isLoggedIn: auth.auth2Instance.isSignedIn.get() });
-        } else   this.setState({ user: null, isLoggedIn:auth.auth2Instance.isSignedIn.get() });
+        }
+        this.setState({ user, isLoggedIn: true });
 
-        
+
 
 
     }
 
+    private loggin(): void {
+        if (this.state.signIn) {
+            this.state.signIn();
+            this.IsLoggeInUser();
+        }
+    }
 
+    private loggout(): void {
+        if (this.state.signOut) {
+            this.state.signOut();
+            this.setState({ user: null, isLoggedIn: false });
+        }
+    }
     override render(): React.ReactNode {
 
-        console.log("====>", this.state);
 
-        if(this.state.isLoggedIn){
+        if (this.state.isLoggedIn) {
             return (
-                    <button onClick={this.state.signOut} className="ui red google button">
-                        <i className="google icon" />
-                        Sign out
-                    </button>
-                );
+                <button onClick={() => this.loggout()} className="ui red google button">
+                    <i className="google icon" />
+                    Sign out
+                </button>
+            );
         }
         return (
-               <button onClick={this.state.signIn} className="ui red google button">
+            <button onClick={() => this.loggin()} className="ui red google button">
                 <i className="google icon" />
                 Sign in with google-account
-               </button> 
+            </button>
         )
     }
 }
