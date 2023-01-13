@@ -72,10 +72,20 @@ export class GoogleAuth extends React.Component<unknown, GoogleAuthState>{
 
         if (this.state.isLoggedIn) {
             return (
-                <button onClick={() => this.loggout()} className="ui red google button">
-                    <i className="google icon" />
-                    Sign out
-                </button>
+                <div>
+
+
+                    <div style={{ background: 'none !important' }} className="ui icon button" data-tooltip={`${this.state.user?.familyName} ,    ${this.state.user?.givenName}`} data-position="bottom left" data-inverted="">
+                        <img src={this.state.user?.imageUrl} alt="avatar" data-title="Elliot Fu" data-tooltip="Elliot has been a member since July 2012" data-position="top left" data-inverted="" className="ui avatar image" />
+
+
+                    </div>
+
+                    <button onClick={() => this.loggout()} className="ui red google button">
+                        <i className="google icon" />
+                        Sign out
+                    </button>
+                </div>
             );
         }
         return (
