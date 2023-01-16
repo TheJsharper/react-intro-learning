@@ -30,24 +30,30 @@ export class GoogleAuth extends React.Component<unknown, GoogleAuthState>{
         (async () => {
 
             const auth = await LoadGapi();
-            this.setState({ signIn: auth.auth2Instance.signIn, signOut: auth.auth2Instance.signOut, auth2: auth.auth2Instance });
+            this.setState({ signIn: auth.auth2Instance.signIn, signOut: auth.auth2Instance.signOut, auth2: auth.auth2Instance, isLoggedIn: auth.auth2Instance.isSignedIn.get()}, ()=>{
 
-
+                if(auth.auth2Instance.isSignedIn.get()){
+                    this.storeUserProfile();
+                }
+            });
+            
         })();
-        console.log("===> DIDMONUT----");
     }
-    private IsLoggeInUser() {
-        const user: User = {
-            email: this.state.auth2.currentUser?.get().getBasicProfile().getEmail(),
-            familyName: this.state.auth2.currentUser?.get().getBasicProfile().getFamilyName(),
-            givenName: this.state.auth2.currentUser?.get().getBasicProfile().getGivenName(),
-            id: this.state.auth2.currentUser?.get().getBasicProfile().getId(),
-            imageUrl: this.state.auth2.currentUser?.get().getBasicProfile().getImageUrl(),
-            name: this.state.auth2.currentUser?.get().getBasicProfile().getName()
+    private storeUserProfile() {
+        if(this.state.auth2.currentUser && this.state.auth2.currentUser?.get().getBasicProfile()){
 
-
+            const user: User = {
+                email: this.state.auth2.currentUser?.get().getBasicProfile().getEmail(),
+                familyName: this.state.auth2.currentUser?.get().getBasicProfile().getFamilyName(),
+                givenName: this.state.auth2.currentUser?.get().getBasicProfile().getGivenName(),
+                id: this.state.auth2.currentUser?.get().getBasicProfile().getId(),
+                imageUrl: this.state.auth2.currentUser?.get().getBasicProfile().getImageUrl(),
+                name: this.state.auth2.currentUser?.get().getBasicProfile().getName()
+    
+    
+            }
+            this.setState({ user});
         }
-        this.setState({ user, isLoggedIn: true });
 
 
 
@@ -57,18 +63,19 @@ export class GoogleAuth extends React.Component<unknown, GoogleAuthState>{
     private loggin(): void {
         if (this.state.signIn) {
             this.state.signIn();
-            this.IsLoggeInUser();
+            this.setState({isLoggedIn:true});
+            this.storeUserProfile();
         }
     }
 
     private loggout(): void {
-        if (this.state.signOut) {
+        if (this.state.signOut && this.state.isLoggedIn) {
             this.state.signOut();
             this.setState({ user: null, isLoggedIn: false });
         }
     }
     override render(): React.ReactNode {
-
+        console.log("===> Rendering", this.state );
 
         if (this.state.isLoggedIn) {
             return (

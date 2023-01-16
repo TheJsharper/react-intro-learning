@@ -18,9 +18,7 @@ export const LoadGapi = async () => {
                     plugin_name: process.env['NX_TRANSLATE_GOOGLEAPIS_AUTH2_PLUGIN_NAME'] as string,
                 }).then(() => {
                     const auth = gapi.auth2.getAuthInstance();
-                   // console.log(gapi);
                     resulve({auth2Instance:auth, auth:gapi.auth});
-                    return auth;
                 })
             });
 
